@@ -24,13 +24,8 @@ body {
 
 /* Thumb (scroll handle) */
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #4e4e4e, #cfcfcf);
+  background-color: #4e4e4e;
   border-radius: 10px;
-}
-
-/* Thumb hover effect */
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #cfcfcf, #4e4e4e);
 }
 
 .loader-container {
