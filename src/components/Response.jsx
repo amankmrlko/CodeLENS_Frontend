@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from "react";
 
-function Response(props) {
+function Response({ resmsg, error }) {
   const [isVisible, setIsVisible] = useState(false);
-  const empty = !props.resmsg || props.resmsg.trim() === "";
+  const hasResponse = resmsg && resmsg.trim() !== "";
+  const hasError = Boolean(error);
 
   useEffect(() => {
-    if (!empty) {
-      // Trigger fade-in animation
+    if (hasResponse || hasError) {
       const timer = setTimeout(() => setIsVisible(true), 50);
       return () => clearTimeout(timer);
     }
-  }, [empty, props.resmsg]);
+  }, [hasResponse, hasError, resmsg, error]);
 
-  if (empty && !props.error) {
-    return null;
-  }
+  if (!hasResponse && !hasError) return null;
 
   return (
     <div
       className={`msg-container msg-container2 ${isVisible ? "fade-in" : ""}`}
     >
       <div className="response">
-        {props.error && <p className="err">{props.error}</p>}
-        {props.resmsg && <p>{props.resmsg}</p>}
+        {hasError && <p className="err">⚠️ {error}</p>}
+        {hasResponse && <p>{resmsg}</p>}
       </div>
     </div>
   );
